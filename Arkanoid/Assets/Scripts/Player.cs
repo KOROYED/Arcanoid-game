@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 10f;
     float screenHalfWidthInWorldUnits;
 
     void Start()
@@ -30,4 +30,6 @@ public class Player : MonoBehaviour
             transform.position = new Vector2(screenHalfWidthInWorldUnits - halfPlayerWidth, transform.position.y);
         }
     }
+
+    
 }

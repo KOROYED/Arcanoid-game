@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class BlocksScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ball")
+        {
+            int PowerUpChance = Random.Range(1, 101);
+            print(PowerUpChance);
+            PowerUpChance = 0;
+        }
     }
 }
