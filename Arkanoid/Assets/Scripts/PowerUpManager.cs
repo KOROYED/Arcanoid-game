@@ -12,16 +12,35 @@ public class PowerUpManager : MonoBehaviour
     void Start() 
     {
         script = GameObject.Find("Player").GetComponent<Player>();
+        
     }
+    void Update()
+    {
+        if (script.buff == 1)
+        {
+            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitSpeedBuff;
+            script.buff = 0;
+        }
+        else if (script.buff == 2)
+        {
+            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitSpeedDeBuff;
+            script.buff = 0;
+        }
+    }
+
+
 
     internal void OnPlayerHitSpeedDeBuff()
     {
+
         script.currentSpeed /= 2;
+        FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitSpeedDeBuff;
         StartCoroutine(playerSpeedBuffAndDebuffTimer());
     }
     internal void OnPlayerHitSpeedBuff()
     {
         script.currentSpeed *= 2;
+        FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitSpeedBuff;
         StartCoroutine(playerSpeedBuffAndDebuffTimer());
     }
     
@@ -35,7 +54,7 @@ public class PowerUpManager : MonoBehaviour
         if(script.currentSpeed < script.standartSpeed)
         {
             script.currentSpeed *= 2;
-            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitSpeedDeBuff;
+            FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitSpeedDeBuff;
         }
         if (script.currentSpeed > script.standartSpeed)
         {

@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class BlocksScript : MonoBehaviour
 {
+    //public event System.Action<Vector3> OnBallHitBlock;
+
+    //public int buffToSpawn = 0;
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+        //if(OnBallHitBlock != null)
+        //{
+        //    OnBallHitBlock(gameObject.transform.position);
+        //}
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ball")
-        {
-            int PowerUpChance = Random.Range(1, 101);
-            print(PowerUpChance);
-            PowerUpChance = 0;
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collider)
+    //{
+    //    if (collider.gameObject.tag == "Ball")
+    //    {
+    //        Debug.Log("kek");
+    //        buffToSpawn = 1;
+    //    }
+    //}
 }

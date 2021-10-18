@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+
+    public event System.Action<Vector3> OnBallHitBlock;
+    public int buffToSpawn = 0;
+
     public float speed = 100.0f;
     private Rigidbody2D rigidbody2D;
     float visibleHeightThreshold;
@@ -22,23 +26,13 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         RestartSystem();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.name == "Player")
+        if(OnBallHitBlock != null)
         {
-            float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
-
-            Vector2 dir = new Vector2(x, 1).normalized;
-
-            rigidbody2D.velocity = dir * speed;
-        }
-        if(collision.gameObject.tag == "Block")
-        {
-            Destroy(collision.gameObject);
+            OnBallHitBlock(gameObject.transform.position);
         }
     }
+
+    
     float HitFactor (Vector2 ballPos, Vector2 playerPos, float playerWidth)
     {
         return (ballPos.x - playerPos.x) / playerWidth;
@@ -67,6 +61,22 @@ public class Ball : MonoBehaviour
         {
             Destroy(gameObject);
             print("You lost");
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Player")
+        {
+            float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
+
+            Vector2 dir = new Vector2(x, 1).normalized;
+
+            rigidbody2D.velocity = dir * speed;
+        }
+        if (collision.gameObject.tag == "Block")
+        {
+            buffToSpawn = 1;
+            Destroy(collision.gameObject);
         }
     }
 }
