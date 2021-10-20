@@ -8,6 +8,9 @@ TagManager:
   - Ball
   - SpeedBuff
   - SpeedDebuff
+  - MultiBallBuff
+  - PlayerSizeBuff
+  - PlayerSizeDebuff
   layers:
   - Default
   - TransparentFX

@@ -6,8 +6,11 @@ public class PowerUpSpawner : MonoBehaviour
 {
     Ball ball;
 
+    public GameObject multiBallPrefab;
     public GameObject speedBuffPrefab;
     public GameObject speedDebuffPrefab;
+    public GameObject playerSizeBuff;
+    public GameObject playerSizeDebuff;
     GameObject buffPrefab;
 
     void Start()
@@ -29,7 +32,7 @@ public class PowerUpSpawner : MonoBehaviour
     {
         Debug.Log("kek");
         Vector3 spawnPosition = position;
-        int buff = Random.Range(1, 5);
+        int buff = Random.Range(1, 10);
         switch (buff)
         {
             case 1:
@@ -38,6 +41,18 @@ public class PowerUpSpawner : MonoBehaviour
                 break;
             case 2:
                 buffPrefab = speedDebuffPrefab;
+                Instantiate(buffPrefab, spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
+            case 3:
+                buffPrefab = multiBallPrefab;
+                Instantiate(buffPrefab, spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
+            case 4:
+                buffPrefab = playerSizeBuff;
+                Instantiate(buffPrefab, spawnPosition, Quaternion.Euler(0, 0, 0));
+                break;
+            case 5:
+                buffPrefab = playerSizeDebuff;
                 Instantiate(buffPrefab, spawnPosition, Quaternion.Euler(0, 0, 0));
                 break;
             default:

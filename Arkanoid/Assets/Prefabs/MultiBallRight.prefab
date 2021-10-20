@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1296168168113691224}
   - component: {fileID: 1296168168113691227}
   - component: {fileID: 1296168168113691226}
-  - component: {fileID: 1296168168113691237}
+  - component: {fileID: 4426015950081918764}
   m_Layer: 0
-  m_Name: Ball
+  m_Name: MultiBallRight
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1296168168113691237
+--- !u!114 &4426015950081918764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +130,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296168168113691236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c00342283ba251418cca50dc4520709, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d078944019d51e40a64b5e1349e57b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buffToSpawn: 0
   speed: 6
   Player: {fileID: 0}
-  ballCount: 3
+  ballCount: 0

@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
 
     public event Action OnPlayerHitBuff;
-
+    
 
     public float currentSpeed = 5f;
     public float standartSpeed = 5f;
@@ -54,6 +54,21 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "SpeedDebuff")
         {
             buff = 2;
+            Destroy(collider.gameObject);
+        }
+        if (collider.gameObject.tag == "MultiBallBuff")
+        {
+            buff = 3;
+            Destroy(collider.gameObject);
+        }
+        if (collider.gameObject.tag == "PlayerSizeBuff")
+        {
+            buff = 4;
+            Destroy(collider.gameObject);
+        }
+        if (collider.gameObject.tag == "PlayerSizeDebuff")
+        {
+            buff = 5;
             Destroy(collider.gameObject);
         }
     }
