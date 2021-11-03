@@ -10,12 +10,14 @@ public class PowerUpManager : MonoBehaviour
 
     public int speedBuffDuration;
     public int playerSizeBuffDuration;
+    public int ballSizeBuffDuration;
     public GameObject multiBallRight;
     public GameObject multiBallLeft;
 
 
     int playerSizeBuffed = 0;
     int playerSizeDebuffed = 0;
+    int ballSizeBuffed = 0;
 
     void Start() 
     {
@@ -25,33 +27,49 @@ public class PowerUpManager : MonoBehaviour
     }
     void Update()
     {
-        if (script.buff == 1)
+        switch (script.buff)
         {
-            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitSpeedBuff;
-            script.buff = 0;
-        }
-        else if (script.buff == 2)
-        {
-            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitSpeedDeBuff;
-            script.buff = 0;
-        }
-        else if (script.buff == 3)
-        {
-            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitMultiBallBuff;
-            script.buff = 0;
-        }
-        else if (script.buff == 4)
-        {
-            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitPlayerSizeBuff;
-            script.buff = 0;
-        }
-        else if (script.buff == 5)
-        {
-            FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitPlayerSizeDebuff;
-            script.buff = 0;
+            case 1:
+                FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitSpeedBuff;
+                script.buff = 0;
+                break;
+            case 2:
+                FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitSpeedDeBuff;
+                script.buff = 0;
+                break;
+            case 3:
+                FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitMultiBallBuff;
+                script.buff = 0;
+                break;
+            case 4:
+                FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitPlayerSizeBuff;
+                script.buff = 0;
+                break;
+            case 5:
+                FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitPlayerSizeDebuff;
+                script.buff = 0;
+                break;
+            case 6:
+                FindObjectOfType<Player>().OnPlayerHitBuff += OnPlayerHitBallSizeBuff;
+                script.buff = 0;
+                break;
+            default:
+                break;
         }
     }
+    void OnPlayerHitBallSizeBuff()
+    {
+        ballSizeBuffed++;
+        if(ballSizeBuffed == 1)
+        {
+            Vector3 temp = ball.transform.localScale;
+            temp *= 2;
+            ball.transform.localScale = temp;
+        }
+        FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitBallSizeBuff;
+        StartCoroutine(ballSizeBuffTimer());
 
+    }
     void OnPlayerHitPlayerSizeBuff()
     {
         playerSizeBuffed++;
@@ -108,6 +126,21 @@ public class PowerUpManager : MonoBehaviour
     {
         yield return new WaitForSeconds(playerSizeBuffDuration);
         playerSizeBuffUndo();
+    }
+    IEnumerator ballSizeBuffTimer()
+    {
+        yield return new WaitForSeconds(ballSizeBuffDuration);
+        ballSizeBuffUndo();
+    }
+    void ballSizeBuffUndo()
+    {
+        if(ballSizeBuffed == 1)
+        {
+            Vector3 temp = ball.transform.localScale;
+            temp /= 2;
+            ball.transform.localScale = temp;
+            ballSizeBuffed--;
+        }
     }
     void playerSpeedBuffUndo()
     {

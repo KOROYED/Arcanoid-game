@@ -46,30 +46,34 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "SpeedBuff")
+        switch (collider.gameObject.tag)
         {
-            buff = 1;
-            Destroy(collider.gameObject);
-        }
-        if (collider.gameObject.tag == "SpeedDebuff")
-        {
-            buff = 2;
-            Destroy(collider.gameObject);
-        }
-        if (collider.gameObject.tag == "MultiBallBuff")
-        {
-            buff = 3;
-            Destroy(collider.gameObject);
-        }
-        if (collider.gameObject.tag == "PlayerSizeBuff")
-        {
-            buff = 4;
-            Destroy(collider.gameObject);
-        }
-        if (collider.gameObject.tag == "PlayerSizeDebuff")
-        {
-            buff = 5;
-            Destroy(collider.gameObject);
+            case "SpeedBuff":
+                buff = 1;
+                Destroy(collider.gameObject);
+                break;
+            case "SpeedDebuff":
+                buff = 2;
+                Destroy(collider.gameObject);
+                break;
+            case "MultiBallBuff":
+                buff = 3;
+                Destroy(collider.gameObject);
+                break;
+            case "PlayerSizeBuff":
+                buff = 4;
+                Destroy(collider.gameObject);
+                break;
+            case "PlayerSizeDebuff":
+                buff = 5;
+                Destroy(collider.gameObject);
+                break;
+            case "BallSizeBuff":
+                buff = 6;
+                Destroy(collider.gameObject);
+                break;
+            default:
+                break;
         }
     }
 }

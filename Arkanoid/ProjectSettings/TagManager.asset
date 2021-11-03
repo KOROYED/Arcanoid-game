@@ -11,6 +11,7 @@ TagManager:
   - MultiBallBuff
   - PlayerSizeBuff
   - PlayerSizeDebuff
+  - BallSizeBuff
   layers:
   - Default
   - TransparentFX

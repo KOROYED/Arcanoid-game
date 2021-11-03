@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedBuffDuration: 5
   playerSizeBuffDuration: 10
+  ballSizeBuffDuration: 5
   multiBallRight: {fileID: 1296168168113691236, guid: 4c3564c9080f502419f0bfd110d7ac43, type: 3}
   multiBallLeft: {fileID: 1296168168113691236, guid: 44b923dd10c17ee43af37533f02e5005, type: 3}
 --- !u!4 &231857515
@@ -618,6 +619,7 @@ MonoBehaviour:
   speedDebuffPrefab: {fileID: 6461136595908433897, guid: 2314c74695b96d44b8be7503d19c90f7, type: 3}
   playerSizeBuff: {fileID: 1678256661985068386, guid: 8c083a24c307a214b86a3bdd335defd3, type: 3}
   playerSizeDebuff: {fileID: 744913741989519811, guid: 8d03559b8d8f66b49b15c737572d948d, type: 3}
+  ballSizeBuff: {fileID: 1678256661985068386, guid: d52bb520ed394c84cb7a5b9b2763fc4a, type: 3}
 --- !u!4 &887654051
 Transform:
   m_ObjectHideFlags: 0

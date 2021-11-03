@@ -7,12 +7,12 @@ public class MultiBallRight : MonoBehaviour
     public event System.Action<Vector3> OnBallHitBlock;
     public int buffToSpawn = 0;
 
+    Ball ball;
     public float speed = 6.0f;
     private Rigidbody2D rigidbody2D;
     float visibleHeightThreshold;
     public GameObject Player;
 
-    private bool IsGameStarted = false;
     public float ballCount;
 
 
@@ -21,11 +21,13 @@ public class MultiBallRight : MonoBehaviour
         visibleHeightThreshold = -Camera.main.orthographicSize - transform.localScale.y;
         rigidbody2D = transform.GetComponent<Rigidbody2D>();
         rigidbody2D.velocity = new Vector2(1,1).normalized * speed;
+        ball = GameObject.Find("Ball").GetComponent<Ball>();
 
     }
     private void Update()
     {
         BallDestructionMethod();
+        transform.localScale = ball.transform.localScale;
         if (OnBallHitBlock != null)
         {
             OnBallHitBlock(gameObject.transform.position);
