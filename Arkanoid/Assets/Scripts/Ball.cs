@@ -67,6 +67,7 @@ public class Ball : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
+            FindObjectOfType<AudioManager>().Play("BallHitWall");
             float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
 
             Vector2 dir = new Vector2(x, 1).normalized;
@@ -75,6 +76,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "Block")
         {
+            FindObjectOfType<AudioManager>().Play("BlockBreak");
             buffToSpawn = 1;
             Destroy(collision.gameObject);
         }
@@ -83,6 +85,10 @@ public class Ball : MonoBehaviour
             float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
             Vector2 dir = new Vector2(x, 1).normalized;
             rigidbody2D.velocity = dir * speed;
+        }
+        if(collision.gameObject.tag == "Wall")
+        {
+            FindObjectOfType<AudioManager>().Play("BallHitWall");
         }
     }
 }
