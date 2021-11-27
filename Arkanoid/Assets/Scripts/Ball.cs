@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-
     public event System.Action<Vector3> OnBallHitBlock;
     public int buffToSpawn = 0;
 
@@ -12,6 +11,7 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rigidbody2D;
     float visibleHeightThreshold;
     public GameObject Player;
+    Player player;
 
     private bool IsGameStarted = false;
     public float ballCount;
@@ -21,6 +21,8 @@ public class Ball : MonoBehaviour
     {
         visibleHeightThreshold = -Camera.main.orthographicSize - transform.localScale.y;
         rigidbody2D = transform.GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player").GetComponent<Player>();
+
 
     }
     private void Update()
@@ -42,7 +44,7 @@ public class Ball : MonoBehaviour
     {
         if (IsGameStarted == false)
         {
-            transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 0.3f);
+            transform.position = player.transform.position + new Vector3(0, 0.3f);
         }
         if (IsGameStarted == false && Input.GetKeyDown(KeyCode.Space))
         {
@@ -52,13 +54,14 @@ public class Ball : MonoBehaviour
         }
         if (transform.position.y < visibleHeightThreshold)
         {
-            transform.position = new Vector2(Player.transform.position.x, Player.transform.position.y + 0.3f);
+            transform.position = player.transform.position + new Vector3(0, 0.3f);
             rigidbody2D.velocity = Vector2.zero;
             ballCount--;
             IsGameStarted = false;
         }
         if (ballCount == 0)
         {
+            FindObjectOfType<AudioManager>().Play("Gameover");
             Destroy(gameObject);
             print("You lost");
         }
@@ -80,10 +83,10 @@ public class Ball : MonoBehaviour
             buffToSpawn = 1;
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.tag == "Ball")
+        if(collision.gameObject.tag == "Multiball")
         {
             float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
-            Vector2 dir = new Vector2(x, 1).normalized;
+            Vector2 dir = new Vector2(x, -1).normalized;
             rigidbody2D.velocity = dir * speed;
         }
         if(collision.gameObject.tag == "Wall")

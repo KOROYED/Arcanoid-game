@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiBallLeft : MonoBehaviour
+public class Multiball : MonoBehaviour
 {
+    Ball ball;
     public event System.Action<Vector3> OnBallHitBlock;
     public int buffToSpawn = 0;
 
-    Ball ball;
     public float speed = 6.0f;
     private Rigidbody2D rigidbody2D;
     float visibleHeightThreshold;
-    public GameObject Player;
 
+    private bool IsGameStarted = false;
     public float ballCount;
 
 
@@ -20,17 +20,21 @@ public class MultiBallLeft : MonoBehaviour
     {
         visibleHeightThreshold = -Camera.main.orthographicSize - transform.localScale.y;
         rigidbody2D = transform.GetComponent<Rigidbody2D>();
-        rigidbody2D.velocity = new Vector2(-1,1).normalized * speed/2;
         ball = GameObject.Find("Ball").GetComponent<Ball>();
-
     }
     private void Update()
     {
-        BallDestructionMethod();
-        transform.localScale = ball.transform.localScale;
+        if (transform.position.y < visibleHeightThreshold)
+        {
+            Destroy(gameObject);
+        }
         if (OnBallHitBlock != null)
         {
             OnBallHitBlock(gameObject.transform.position);
+        }
+        if (ball != null)
+        {
+            gameObject.transform.localScale = ball.transform.localScale;
         }
     }
 
@@ -45,6 +49,7 @@ public class MultiBallLeft : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
+            FindObjectOfType<AudioManager>().Play("BallHitWall");
             float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
 
             Vector2 dir = new Vector2(x, 1).normalized;
@@ -53,6 +58,7 @@ public class MultiBallLeft : MonoBehaviour
         }
         if (collision.gameObject.tag == "Block")
         {
+            FindObjectOfType<AudioManager>().Play("BlockBreak");
             buffToSpawn = 1;
             Destroy(collision.gameObject);
         }
@@ -62,12 +68,10 @@ public class MultiBallLeft : MonoBehaviour
             Vector2 dir = new Vector2(x, 1).normalized;
             rigidbody2D.velocity = dir * speed;
         }
-    }
-    void BallDestructionMethod()
-    {
-        if (transform.position.y < visibleHeightThreshold)
+        if (collision.gameObject.tag == "Wall")
         {
-            Destroy(gameObject);
+            FindObjectOfType<AudioManager>().Play("BallHitWall");
         }
     }
 }
+

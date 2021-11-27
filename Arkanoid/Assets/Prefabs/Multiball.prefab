@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1296168168113691224}
   - component: {fileID: 1296168168113691227}
   - component: {fileID: 1296168168113691226}
-  - component: {fileID: -1720161361605708826}
+  - component: {fileID: -6513034460469720599}
   m_Layer: 0
-  m_Name: MultiBallLeft
-  m_TagString: Ball
+  m_Name: Multiball
+  m_TagString: Multiball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1296168168113691236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4.11, z: -0.036}
-  m_LocalScale: {x: 0.29304373, y: 0.29304373, z: 0.29304373}
+  m_LocalScale: {x: 0.2930437, y: 0.2930437, z: 0.2930437}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -99,7 +99,7 @@ Rigidbody2D:
   m_Mass: 0.0001
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.0001
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-1720161361605708826
+--- !u!114 &-6513034460469720599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,10 +130,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296168168113691236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be2e01354b4fa6b42b4896f9e90c325f, type: 3}
+  m_Script: {fileID: 11500000, guid: d4ca376d1b2005f4584ae519c8cc0fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buffToSpawn: 0
   speed: 6
-  Player: {fileID: 0}
   ballCount: 0

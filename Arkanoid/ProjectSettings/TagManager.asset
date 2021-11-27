@@ -13,6 +13,7 @@ TagManager:
   - PlayerSizeDebuff
   - BallSizeBuff
   - Wall
+  - Multiball
   layers:
   - Default
   - TransparentFX

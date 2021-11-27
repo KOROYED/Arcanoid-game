@@ -11,8 +11,7 @@ public class PowerUpManager : MonoBehaviour
     public int speedBuffDuration;
     public int playerSizeBuffDuration;
     public int ballSizeBuffDuration;
-    public GameObject multiBallRight;
-    public GameObject multiBallLeft;
+    public GameObject ballObject;
 
 
     int playerSizeBuffed = 0;
@@ -98,8 +97,12 @@ public class PowerUpManager : MonoBehaviour
     }
     void OnPlayerHitMultiBallBuff()
     {
-        Instantiate(multiBallRight, ball.transform.position, Quaternion.Euler(0, 0, 0));
-        Instantiate(multiBallLeft, ball.transform.position, Quaternion.Euler(0, 0, 0));
+        GameObject leftBall = Instantiate(ballObject, ball.transform.position + Vector3.right/2, Quaternion.Euler(0, 0, 0));
+        GameObject rightBall = Instantiate(ballObject, ball.transform.position + Vector3.left/2, Quaternion.Euler(0, 0, 0));
+        Rigidbody2D leftBallRg = leftBall.GetComponent<Rigidbody2D>();
+        Rigidbody2D rightBallRg = rightBall.GetComponent<Rigidbody2D>();
+        leftBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(-1.5f,1);
+        rightBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(1.5f, 1);
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitMultiBallBuff;
     }
 
