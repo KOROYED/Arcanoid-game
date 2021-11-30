@@ -14,7 +14,6 @@ public class Ball : MonoBehaviour
     Player player;
 
     private bool IsGameStarted = false;
-    public float ballCount;
 
 
     void Start()
@@ -27,11 +26,17 @@ public class Ball : MonoBehaviour
     }
     private void Update()
     {
-        RestartSystem();
+        //RestartSystem();
         if(OnBallHitBlock != null)
         {
             OnBallHitBlock(gameObject.transform.position);
         }
+        //if (IsGameStarted == false && Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    rigidbody2D.velocity = Vector2.up * speed;
+        //    IsGameStarted = true;
+
+        //}
     }
 
     
@@ -44,27 +49,26 @@ public class Ball : MonoBehaviour
     {
         if (IsGameStarted == false)
         {
-            transform.position = player.transform.position + new Vector3(0, 0.3f);
+            //transform.position = player.transform.position + new Vector3(0, 0.3f);
         }
-        if (IsGameStarted == false && Input.GetKeyDown(KeyCode.Space))
-        {
-            rigidbody2D.velocity = Vector2.up * speed;
-            IsGameStarted = true;
+        //if (IsGameStarted == false && Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    rigidbody2D.velocity = Vector2.up * speed;
+        //    IsGameStarted = true;
 
-        }
-        if (transform.position.y < visibleHeightThreshold)
-        {
-            transform.position = player.transform.position + new Vector3(0, 0.3f);
-            rigidbody2D.velocity = Vector2.zero;
-            ballCount--;
-            IsGameStarted = false;
-        }
-        if (ballCount == 0)
-        {
-            FindObjectOfType<AudioManager>().Play("Gameover");
-            Destroy(gameObject);
-            print("You lost");
-        }
+        //}
+        //if (transform.position.y < visibleHeightThreshold)
+        //{
+        //    transform.position = player.transform.position + new Vector3(0, 0.3f);
+        //    rigidbody2D.velocity = Vector2.zero;
+        //    ballCount--;
+        //    IsGameStarted = false;
+        //}
+        //if(ballCount == 0)
+        //{
+        //    Destroy(gameObject);
+        //}
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -83,15 +87,20 @@ public class Ball : MonoBehaviour
             buffToSpawn = 1;
             Destroy(collision.gameObject);
         }
-        if(collision.gameObject.tag == "Multiball")
+        if(collision.gameObject.tag == "Ball")
         {
             float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
-            Vector2 dir = new Vector2(x, -1).normalized;
-            rigidbody2D.velocity = dir * speed;
+            //Vector2 dir = new Vector2(x, 1).normalized;
+            //rigidbody2D.velocity = dir * speed;
         }
         if(collision.gameObject.tag == "Wall")
         {
             FindObjectOfType<AudioManager>().Play("BallHitWall");
+            float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
+
+            //Vector2 dir = new Vector2(x, -1).normalized;
+
+            //rigidbody2D.velocity = dir * speed;
         }
     }
 }

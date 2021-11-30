@@ -59,7 +59,7 @@ public class PowerUpManager : MonoBehaviour
     void OnPlayerHitBallSizeBuff()
     {
         ballSizeBuffed++;
-        if(ballSizeBuffed == 1)
+        if (ballSizeBuffed == 1)
         {
             Vector3 temp = ball.transform.localScale;
             temp *= 2;
@@ -67,7 +67,6 @@ public class PowerUpManager : MonoBehaviour
         }
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitBallSizeBuff;
         StartCoroutine(ballSizeBuffTimer());
-
     }
     void OnPlayerHitPlayerSizeBuff()
     {
@@ -97,12 +96,12 @@ public class PowerUpManager : MonoBehaviour
     }
     void OnPlayerHitMultiBallBuff()
     {
-        GameObject leftBall = Instantiate(ballObject, ball.transform.position + Vector3.right/2, Quaternion.Euler(0, 0, 0));
-        GameObject rightBall = Instantiate(ballObject, ball.transform.position + Vector3.left/2, Quaternion.Euler(0, 0, 0));
+        GameObject leftBall = Instantiate(ballObject, ball.transform.position + Vector3.right / 2, Quaternion.Euler(0, 0, 0));
+        GameObject rightBall = Instantiate(ballObject, ball.transform.position + Vector3.left / 2, Quaternion.Euler(0, 0, 0));
         Rigidbody2D leftBallRg = leftBall.GetComponent<Rigidbody2D>();
         Rigidbody2D rightBallRg = rightBall.GetComponent<Rigidbody2D>();
-        leftBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(-1.5f,1);
-        rightBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(1.5f, 1);
+        leftBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(1.5f, 0);
+        rightBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(-1.5f, 0);
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitMultiBallBuff;
     }
 
@@ -137,7 +136,7 @@ public class PowerUpManager : MonoBehaviour
     }
     void ballSizeBuffUndo()
     {
-        if(ballSizeBuffed == 1)
+        if (ballSizeBuffed == 1)
         {
             Vector3 temp = ball.transform.localScale;
             temp /= 2;
