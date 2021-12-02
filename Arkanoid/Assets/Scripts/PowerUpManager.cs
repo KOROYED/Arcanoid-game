@@ -100,8 +100,8 @@ public class PowerUpManager : MonoBehaviour
         GameObject rightBall = Instantiate(ballObject, ball.transform.position + Vector3.left / 2, Quaternion.Euler(0, 0, 0));
         Rigidbody2D leftBallRg = leftBall.GetComponent<Rigidbody2D>();
         Rigidbody2D rightBallRg = rightBall.GetComponent<Rigidbody2D>();
-        leftBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(1.5f, 0);
-        rightBallRg.velocity = ball.GetComponent<Rigidbody2D>().velocity + new Vector2(-1.5f, 0);
+        leftBallRg.velocity = ball.speed * new Vector2(1, 1).normalized;
+        rightBallRg.velocity = ball.speed * new Vector2(-1, 1).normalized;
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitMultiBallBuff;
     }
 

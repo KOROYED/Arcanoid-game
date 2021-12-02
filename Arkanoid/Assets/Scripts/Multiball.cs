@@ -36,6 +36,7 @@ public class Multiball : MonoBehaviour
         {
             gameObject.transform.localScale = ball.transform.localScale;
         }
+        
     }
 
 
@@ -64,9 +65,10 @@ public class Multiball : MonoBehaviour
         }
         if (collision.gameObject.tag == "Ball")
         {
-            float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
-            Vector2 dir = new Vector2(x, 1).normalized;
-            rigidbody2D.velocity = dir * speed;
+            //    float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
+            //    Vector2 dir = new Vector2(x, 1).normalized;
+            //    rigidbody2D.velocity = dir * speed;
+            rigidbody2D.velocity = rigidbody2D.velocity.normalized * speed;
         }
         if (collision.gameObject.tag == "Wall")
         {

@@ -24,7 +24,7 @@ public class GameManagerScript : MonoBehaviour
         {
             ball.transform.position = player.transform.position + new Vector3(0, 0.3f);
         }
-        if (ball.gameObject.activeInHierarchy == false && ballCount == 0 && gameOver == false)
+        if (ball.gameObject.activeInHierarchy == false && ballCount == 0 && gameOver == false && FindObjectsOfType<Multiball>().Length == 0)
         {
             FindObjectOfType<AudioManager>().Play("Gameover");
             gameOver = true;
@@ -37,7 +37,7 @@ public class GameManagerScript : MonoBehaviour
             IsGameStarted = true;
 
         }
-        if (ball.transform.position.y < visibleHeightThreshold && FindObjectsOfType<Ball>().Length > 0)
+        if (ball.transform.position.y < visibleHeightThreshold && FindObjectsOfType<Ball>().Length > 0 && FindObjectsOfType<Multiball>().Length == 0)
         {
             ball.transform.position = player.transform.position + new Vector3(0, 0.3f);
             ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

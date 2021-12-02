@@ -22,7 +22,6 @@ public class Ball : MonoBehaviour
         rigidbody2D = transform.GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").GetComponent<Player>();
 
-
     }
     private void Update()
     {
@@ -31,6 +30,7 @@ public class Ball : MonoBehaviour
         {
             OnBallHitBlock(gameObject.transform.position);
         }
+
         //if (IsGameStarted == false && Input.GetKeyDown(KeyCode.Space))
         //{
         //    rigidbody2D.velocity = Vector2.up * speed;
@@ -70,6 +70,7 @@ public class Ball : MonoBehaviour
         //}
         
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Player")
@@ -89,9 +90,7 @@ public class Ball : MonoBehaviour
         }
         if(collision.gameObject.tag == "Ball")
         {
-            float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
-            //Vector2 dir = new Vector2(x, 1).normalized;
-            //rigidbody2D.velocity = dir * speed;
+            rigidbody2D.velocity = rigidbody2D.velocity.normalized * speed;
         }
         if(collision.gameObject.tag == "Wall")
         {
