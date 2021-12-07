@@ -74,3 +74,15 @@ MonoBehaviour:
     pitch: 1.17
     loop: 0
     source: {fileID: 0}
+  - name: Lifelose
+    clip: {fileID: 8300000, guid: 04ce467e720829b429ee16b6c054005c, type: 3}
+    volume: 0.42
+    pitch: 1.17
+    loop: 0
+    source: {fileID: 0}
+  - name: Win
+    clip: {fileID: 8300000, guid: 2ca491b59e0d9684c9758f88794aa796, type: 3}
+    volume: 0.42
+    pitch: 1.17
+    loop: 0
+    source: {fileID: 0}

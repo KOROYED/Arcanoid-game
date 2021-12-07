@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public event System.Action<Vector3> OnBallHitBlock;
-    public int buffToSpawn = 0;
+    
 
     public float speed = 6.0f;
     private Rigidbody2D rigidbody2D;
@@ -26,10 +25,7 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         //RestartSystem();
-        if(OnBallHitBlock != null)
-        {
-            OnBallHitBlock(gameObject.transform.position);
-        }
+        
 
         //if (IsGameStarted == false && Input.GetKeyDown(KeyCode.Space))
         //{
@@ -85,7 +81,8 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.tag == "Block")
         {
             FindObjectOfType<AudioManager>().Play("BlockBreak");
-            buffToSpawn = 1;
+            FindObjectOfType<PowerUpSpawner>().buffToSpawn = 1;
+            FindObjectOfType<PowerUpSpawner>().position = collision.gameObject.transform.position;
             Destroy(collision.gameObject);
         }
         if(collision.gameObject.tag == "Ball")

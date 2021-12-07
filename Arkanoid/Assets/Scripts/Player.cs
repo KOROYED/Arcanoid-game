@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
 {
 
     public event Action OnPlayerHitBuff;
-    
+
+    public Vector3 baseSize;
+
 
     public float currentSpeed = 5f;
     public float standartSpeed = 5f;
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        baseSize = transform.localScale;
         screenHalfWidthInWorldUnits = Camera.main.aspect * Camera.main.orthographicSize;
     }
 
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector2(screenHalfWidthInWorldUnits - halfPlayerWidth, transform.position.y);
         }
+        
     }
 
     void OnTriggerEnter2D(Collider2D collider)

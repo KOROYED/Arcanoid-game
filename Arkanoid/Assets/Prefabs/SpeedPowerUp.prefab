@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1451631290766432809}
   - component: {fileID: 1451631290766432805}
   - component: {fileID: 1451631290766432802}
+  - component: {fileID: 4700807635604924939}
   m_Layer: 0
   m_Name: SpeedPowerUp
   m_TagString: SpeedBuff
@@ -141,5 +142,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 342aabf8dba7d354fbd55777b3debbbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4700807635604924939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451631290766432808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eeffb7db0520542a6bbd5bc263a5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

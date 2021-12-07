@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PowerUpSpawner : MonoBehaviour
 {
-    Ball ball;
+    public Vector3 position = Vector3.zero;
+    public int buffToSpawn = 0;
+    public event System.Action<Vector3> OnBallHitBlock;
+
 
     public GameObject multiBallPrefab;
     public GameObject speedBuffPrefab;
@@ -16,23 +19,26 @@ public class PowerUpSpawner : MonoBehaviour
 
     void Start()
     {
-        ball = GameObject.Find("Ball").GetComponent<Ball>();
     }
 
 
     void Update()
     {
-        if (ball.buffToSpawn == 1)
+        if (OnBallHitBlock != null)
         {
-            FindObjectOfType<Ball>().OnBallHitBlock += SpawnBuff;
-            ball.buffToSpawn = 0;
+            OnBallHitBlock(position);
+        }
+        if (buffToSpawn == 1)
+        {
+            OnBallHitBlock += SpawnBuff;
+            buffToSpawn = 0;
         }
     }
 
     void SpawnBuff(Vector3 position)
     {
         Vector3 spawnPosition = position;
-        int buff = Random.Range(1, 12);
+        int buff = Random.Range(1, 24);
         switch (buff)
         {
             case 1:
@@ -63,6 +69,6 @@ public class PowerUpSpawner : MonoBehaviour
                 break;
         }
         
-        FindObjectOfType<Ball>().OnBallHitBlock -= SpawnBuff;
+        OnBallHitBlock -= SpawnBuff;
     }
 }

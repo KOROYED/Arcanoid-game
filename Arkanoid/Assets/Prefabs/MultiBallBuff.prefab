@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4028279639025718178}
   - component: {fileID: 4028279639025718189}
   - component: {fileID: 4028279639025718188}
+  - component: {fileID: -8995614400034576848}
   m_Layer: 0
   m_Name: MultiBallBuff
   m_TagString: MultiBallBuff
@@ -130,3 +131,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8995614400034576848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028279639025718190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eeffb7db0520542a6bbd5bc263a5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

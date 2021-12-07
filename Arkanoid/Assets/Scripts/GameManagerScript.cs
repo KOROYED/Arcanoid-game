@@ -39,6 +39,7 @@ public class GameManagerScript : MonoBehaviour
         }
         if (ball.transform.position.y < visibleHeightThreshold && FindObjectsOfType<Ball>().Length > 0 && FindObjectsOfType<Multiball>().Length == 0)
         {
+            FindObjectOfType<AudioManager>().Play("Lifelose");
             ball.transform.position = player.transform.position + new Vector3(0, 0.3f);
             ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             ballCount--;
@@ -47,6 +48,11 @@ public class GameManagerScript : MonoBehaviour
         if (ballCount == 0)
         {
             ball.gameObject.SetActive(false);
+        }
+        if(FindObjectsOfType<BlocksScript>().Length == 0 && gameOver == false)
+        {
+            FindObjectOfType<AudioManager>().Play("Win");
+            gameOver = true;
         }
     }
 }

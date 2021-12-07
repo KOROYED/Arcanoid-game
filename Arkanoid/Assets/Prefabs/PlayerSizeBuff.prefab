@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7876227076798052728}
   - component: {fileID: 3820208090801217282}
   - component: {fileID: 3377334560662489337}
+  - component: {fileID: 9021227322934967694}
   m_Layer: 0
   m_Name: PlayerSizeBuff
   m_TagString: PlayerSizeBuff
@@ -130,3 +131,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9021227322934967694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678256661985068386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92eeffb7db0520542a6bbd5bc263a5e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

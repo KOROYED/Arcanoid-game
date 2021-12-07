@@ -5,8 +5,6 @@ using UnityEngine;
 public class Multiball : MonoBehaviour
 {
     Ball ball;
-    public event System.Action<Vector3> OnBallHitBlock;
-    public int buffToSpawn = 0;
 
     public float speed = 6.0f;
     private Rigidbody2D rigidbody2D;
@@ -28,10 +26,7 @@ public class Multiball : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (OnBallHitBlock != null)
-        {
-            OnBallHitBlock(gameObject.transform.position);
-        }
+        
         if (ball != null)
         {
             gameObject.transform.localScale = ball.transform.localScale;
@@ -60,7 +55,8 @@ public class Multiball : MonoBehaviour
         if (collision.gameObject.tag == "Block")
         {
             FindObjectOfType<AudioManager>().Play("BlockBreak");
-            buffToSpawn = 1;
+            FindObjectOfType<PowerUpSpawner>().buffToSpawn = 1;
+            FindObjectOfType<PowerUpSpawner>().position = collision.gameObject.transform.position;
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Ball")

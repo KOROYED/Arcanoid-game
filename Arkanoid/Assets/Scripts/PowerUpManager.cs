@@ -13,9 +13,9 @@ public class PowerUpManager : MonoBehaviour
     public int ballSizeBuffDuration;
     public GameObject ballObject;
 
-
-    int playerSizeBuffed = 0;
-    int playerSizeDebuffed = 0;
+    bool playerSizeBuffed = false;
+    bool playerSizeDebuffed = false;
+    bool playerSizeChange = false;
     int ballSizeBuffed = 0;
 
     void Start() 
@@ -70,34 +70,38 @@ public class PowerUpManager : MonoBehaviour
     }
     void OnPlayerHitPlayerSizeBuff()
     {
-        playerSizeBuffed++;
-        if (playerSizeBuffed == 1)
+        playerSizeChange = true;
+        if (playerSizeChange == true && playerSizeBuffed == false)
         {
             Vector3 temp = script.transform.localScale;
             temp.x *= 2;
             script.transform.localScale = temp;
+            playerSizeBuffed = true;
+            StartCoroutine(playerSizeBuffTimer());
         }
+
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitPlayerSizeBuff;
-        StartCoroutine(playerSizeBuffTimer());
 
     }
     void OnPlayerHitPlayerSizeDebuff()
     {
-        playerSizeDebuffed++;
-        if(playerSizeDebuffed == 1)
+        playerSizeChange = true;
+        if (playerSizeChange == true && playerSizeDebuffed == false)
         {
             Vector3 temp = script.transform.localScale;
             temp.x /= 2;
             script.transform.localScale = temp;
+            playerSizeDebuffed = true;
+            StartCoroutine(playerSizeBuffTimer());
         }
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitPlayerSizeDebuff;
-        StartCoroutine(playerSizeBuffTimer());
+        
 
     }
     void OnPlayerHitMultiBallBuff()
     {
-        GameObject leftBall = Instantiate(ballObject, ball.transform.position + Vector3.right / 2, Quaternion.Euler(0, 0, 0));
-        GameObject rightBall = Instantiate(ballObject, ball.transform.position + Vector3.left / 2, Quaternion.Euler(0, 0, 0));
+        GameObject leftBall = Instantiate(ballObject, script.transform.position + Vector3.right, Quaternion.Euler(0, 0, 0));
+        GameObject rightBall = Instantiate(ballObject, script.transform.position + Vector3.left, Quaternion.Euler(0, 0, 0));
         Rigidbody2D leftBallRg = leftBall.GetComponent<Rigidbody2D>();
         Rigidbody2D rightBallRg = rightBall.GetComponent<Rigidbody2D>();
         leftBallRg.velocity = ball.speed * new Vector2(1, 1).normalized;
@@ -160,19 +164,20 @@ public class PowerUpManager : MonoBehaviour
     }
     void playerSizeBuffUndo()
     {
-        if(playerSizeBuffed == 1)
+        if(playerSizeBuffed == true)
         {
             Vector3 temp = script.transform.localScale;
             temp.x /= 2;
             script.transform.localScale = temp;
-            playerSizeBuffed--;
         }
-        if(playerSizeDebuffed == 1)
+        if(playerSizeDebuffed == true)
         {
             Vector3 temp = script.transform.localScale;
             temp.x *= 2;
             script.transform.localScale = temp;
-            playerSizeBuffed--;
         }
+        playerSizeDebuffed = false;
+        playerSizeBuffed = false;
+        playerSizeChange = false;
     }
 }
