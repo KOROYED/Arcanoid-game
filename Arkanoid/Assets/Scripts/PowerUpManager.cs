@@ -15,8 +15,20 @@ public class PowerUpManager : MonoBehaviour
 
     bool playerSizeBuffed = false;
     bool playerSizeDebuffed = false;
-    bool playerSizeChange = false;
-    int ballSizeBuffed = 0;
+    bool ballSizeBuffed = false;
+
+    public static PowerUpManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start() 
     {
@@ -58,20 +70,19 @@ public class PowerUpManager : MonoBehaviour
     }
     void OnPlayerHitBallSizeBuff()
     {
-        ballSizeBuffed++;
-        if (ballSizeBuffed == 1)
+        if (ballSizeBuffed == false)
         {
             Vector3 temp = ball.transform.localScale;
             temp *= 2;
             ball.transform.localScale = temp;
+            ballSizeBuffed = true;
+            StartCoroutine(ballSizeBuffTimer());
         }
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitBallSizeBuff;
-        StartCoroutine(ballSizeBuffTimer());
     }
     void OnPlayerHitPlayerSizeBuff()
     {
-        playerSizeChange = true;
-        if (playerSizeChange == true && playerSizeBuffed == false)
+        if (playerSizeBuffed == false)
         {
             Vector3 temp = script.transform.localScale;
             temp.x *= 2;
@@ -85,8 +96,7 @@ public class PowerUpManager : MonoBehaviour
     }
     void OnPlayerHitPlayerSizeDebuff()
     {
-        playerSizeChange = true;
-        if (playerSizeChange == true && playerSizeDebuffed == false)
+        if (playerSizeDebuffed == false)
         {
             Vector3 temp = script.transform.localScale;
             temp.x /= 2;
@@ -94,6 +104,7 @@ public class PowerUpManager : MonoBehaviour
             playerSizeDebuffed = true;
             StartCoroutine(playerSizeBuffTimer());
         }
+
         FindObjectOfType<Player>().OnPlayerHitBuff -= OnPlayerHitPlayerSizeDebuff;
         
 
@@ -140,12 +151,12 @@ public class PowerUpManager : MonoBehaviour
     }
     void ballSizeBuffUndo()
     {
-        if (ballSizeBuffed == 1)
+        if (ballSizeBuffed == true)
         {
             Vector3 temp = ball.transform.localScale;
             temp /= 2;
             ball.transform.localScale = temp;
-            ballSizeBuffed--;
+            ballSizeBuffed = false;
         }
     }
     void playerSpeedBuffUndo()
@@ -169,15 +180,14 @@ public class PowerUpManager : MonoBehaviour
             Vector3 temp = script.transform.localScale;
             temp.x /= 2;
             script.transform.localScale = temp;
+            playerSizeBuffed = false;
         }
         if(playerSizeDebuffed == true)
         {
             Vector3 temp = script.transform.localScale;
             temp.x *= 2;
             script.transform.localScale = temp;
+            playerSizeDebuffed = false;
         }
-        playerSizeDebuffed = false;
-        playerSizeBuffed = false;
-        playerSizeChange = false;
     }
 }

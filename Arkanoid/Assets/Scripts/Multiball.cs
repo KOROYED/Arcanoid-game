@@ -45,7 +45,7 @@ public class Multiball : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            FindObjectOfType<AudioManager>().Play("BallHitWall");
+            AudioManager.instance.Play("BallHitWall");
             float x = HitFactor(transform.position, collision.transform.position, collision.collider.bounds.size.x);
 
             Vector2 dir = new Vector2(x, 1).normalized;
@@ -54,7 +54,7 @@ public class Multiball : MonoBehaviour
         }
         if (collision.gameObject.tag == "Block")
         {
-            FindObjectOfType<AudioManager>().Play("BlockBreak");
+            AudioManager.instance.Play("BlockBreak");
             FindObjectOfType<PowerUpSpawner>().buffToSpawn = 1;
             FindObjectOfType<PowerUpSpawner>().position = collision.gameObject.transform.position;
             Destroy(collision.gameObject);
@@ -68,7 +68,7 @@ public class Multiball : MonoBehaviour
         }
         if (collision.gameObject.tag == "Wall")
         {
-            FindObjectOfType<AudioManager>().Play("BallHitWall");
+            AudioManager.instance.Play("BallHitWall");
         }
     }
 }

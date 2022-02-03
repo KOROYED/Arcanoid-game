@@ -53,32 +53,32 @@ public class Player : MonoBehaviour
         switch (collider.gameObject.tag)
         {
             case "SpeedBuff":
-                FindObjectOfType<AudioManager>().Play("Buff");
+                AudioManager.instance.Play("Buff");
                 buff = 1;
                 Destroy(collider.gameObject);
                 break;
             case "SpeedDebuff":
-                FindObjectOfType<AudioManager>().Play("Debuff");
+                AudioManager.instance.Play("Debuff");
                 buff = 2;
                 Destroy(collider.gameObject);
                 break;
             case "MultiBallBuff":
-                FindObjectOfType<AudioManager>().Play("Buff");
+                AudioManager.instance.Play("Buff");
                 buff = 3;
                 Destroy(collider.gameObject);
                 break;
             case "PlayerSizeBuff":
-                FindObjectOfType<AudioManager>().Play("Buff");
+                AudioManager.instance.Play("Buff");
                 buff = 4;
                 Destroy(collider.gameObject);
                 break;
             case "PlayerSizeDebuff":
-                FindObjectOfType<AudioManager>().Play("Debuff");
+                AudioManager.instance.Play("Debuff");
                 buff = 5;
                 Destroy(collider.gameObject);
                 break;
             case "BallSizeBuff":
-                FindObjectOfType<AudioManager>().Play("Buff");
+                AudioManager.instance.Play("Buff");
                 buff = 6;
                 Destroy(collider.gameObject);
                 break;
